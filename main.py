@@ -37,7 +37,8 @@ def captcha(puzzle: str = Form(...), piece: str = Form(...)):
         solver = PuzzleSolver(base64puzzle=base64puzzle,
                               base64piece=base64piece)
         return {"x": solver.get_position()}
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
 
 
@@ -46,7 +47,8 @@ def x_gorgon(req: XGorgonDict):
     try:
         xg = XGorgon()
         return xg.calculate(req.params, req.headers)
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
 
 
@@ -57,7 +59,8 @@ def tt_encrypt(req: PostBase64Dict):
         body = str(base64.b64decode(req.base64))
         data = lib.encrypt(body)
         return {"base64": base64.b64encode(data)}
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
 
 
@@ -69,7 +72,8 @@ def tt_encrypt(req: PostBase64Dict):
         data = ttencrypt.decrypt(body)
         data = ast.literal_eval(data)
         return Response(data, headers={"Content-Type": 'application/json'})
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
 
 
@@ -80,7 +84,8 @@ def tt_encrypt(req: PostBase64Dict):
         body = str(base64.b64decode(req.base64))
         data = lib.encrypt(body)
         return {"base64": base64.b64encode(data)}
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
 
 
@@ -92,7 +97,8 @@ def tt_encrypt(req: PostBase64Dict):
         data = lib.decrypt(body)
         data = ast.literal_eval(data)
         return Response(data, headers={"Content-Type": 'application/json'})
-    except Exception:
+    except Exception as e:
+        print(e)
         return None
 
 
