@@ -5,3 +5,4 @@ pycrypto
 opencv-python-headless
 numpy
 python-multipart
+requests
