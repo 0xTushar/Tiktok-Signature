@@ -6,7 +6,7 @@ import json
 from typing import Optional
 
 import requests
-from fastapi import FastAPI, Form,Response
+from fastapi import FastAPI, Form, Response
 from pydantic import BaseModel
 
 from lib.Captcha import PuzzleSolver
@@ -39,7 +39,6 @@ def captcha(puzzle: str = Form(...), piece: str = Form(...)):
         return {"x": solver.get_position()}
     except Exception:
         return None
-    
 
 
 @app.post('/x-gorgon')
@@ -49,7 +48,6 @@ def x_gorgon(req: XGorgonDict):
         return xg.calculate(req.params, req.headers)
     except Exception:
         return None
-    
 
 
 @app.post('/tt_encrypt')
@@ -61,7 +59,6 @@ def tt_encrypt(req: PostBase64Dict):
         return {"base64": base64.b64encode(data)}
     except Exception:
         return None
-    
 
 
 @app.post('/tt_decrypt')
@@ -70,11 +67,10 @@ def tt_encrypt(req: PostBase64Dict):
         ttencrypt = TT()
         body = base64.b64decode(req.base64)
         data = ttencrypt.decrypt(body)
-        data= ast.literal_eval(data)
-        return Response(data, headers={"Content-Type":'application/json'})
+        data = ast.literal_eval(data)
+        return Response(data, headers={"Content-Type": 'application/json'})
     except Exception:
         return None
-    
 
 
 @app.post('/xlog_encrypt')
@@ -86,7 +82,6 @@ def tt_encrypt(req: PostBase64Dict):
         return {"base64": base64.b64encode(data)}
     except Exception:
         return None
-    
 
 
 @app.post('/xlog_decrypt')
@@ -95,11 +90,11 @@ def tt_encrypt(req: PostBase64Dict):
         lib = XLOG()
         body = base64.b64decode(req.base64)
         data = lib.decrypt(body)
-        data= ast.literal_eval(data)
-        return Response(data, headers={"Content-Type":'application/json'})
+        data = ast.literal_eval(data)
+        return Response(data, headers={"Content-Type": 'application/json'})
     except Exception:
         return None
-    
+
 
 # Start ASGI Server
-# uvicorn Server:app --reload --host 0.0.0.0 --port 8100
+# uvicorn main:app --reload --host 0.0.0.0 --port 8100

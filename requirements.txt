@@ -1,11 +1,7 @@
 fastapi
-Faker==9.8.0
 uvicorn 
 pydantic
 pycrypto
-urllib3==1.26.5
-requests==2.25.1
-pytz
 opencv-python-headless
 numpy
 python-multipart
