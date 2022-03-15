@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 public/
+web: uvicorn main:app --host 0.0.0.0 --port ${PORT:-5000}
