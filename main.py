@@ -70,10 +70,8 @@ def tt_encrypt(req: PostBase64Dict):
         ttencrypt = TT()
         body = base64.b64decode(req.base64)
         data = ttencrypt.decrypt(body)
-        data = ast.literal_eval(data)
         return Response(data, headers={"Content-Type": 'application/json'})
     except Exception as e:
-        print(e)
         return None
 
 
@@ -95,7 +93,6 @@ def tt_encrypt(req: PostBase64Dict):
         lib = XLOG()
         body = base64.b64decode(req.base64)
         data = lib.decrypt(body)
-        data = ast.literal_eval(data)
         return Response(data, headers={"Content-Type": 'application/json'})
     except Exception as e:
         print(e)

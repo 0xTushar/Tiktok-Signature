@@ -4,6 +4,7 @@ import random
 
 from Crypto.Cipher import AES
 
+
 class TT:
     __content = []
     __content_raw = []
@@ -358,7 +359,8 @@ class TT:
         decryptedByteArray = ([0] * 16) + list(decrypted)
         toDecompress = decryptedByteArray[64:]
         result = gzip.decompress(bytes(toDecompress))
-        return result.decode()
+        res= bytes(result).decode()
+        return res
 
     def aes_decrypt(self, secretKey, encoded):
         initVector = encoded[0:16]

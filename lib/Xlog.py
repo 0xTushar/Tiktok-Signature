@@ -2,6 +2,7 @@ import binascii
 import codecs
 import ctypes
 
+
 class XLOG:
     def encrypt(self, inputStart):
         inputStart = list(inputStart.encode())
@@ -14,26 +15,26 @@ class XLOG:
         if fillNum == 8:
             fillNum = 0
 
-        bytes = []
+        _bytes = []
         for i in range(sourceLen + fillNum + 8):
-            bytes.append(0)
+            _bytes.append(0)
         eorByte = [0x78, 0x46, 0x8e, 0xc4, 0x74, 0x4c, 0x00, 0x00]
-        bytes[0] = 0x80 | fillNum - 256
-        bytes[1] = 0x30
-        bytes[2] = 0x22
-        bytes[3] = 0x24
+        _bytes[0] = 0x80 | fillNum - 256
+        _bytes[1] = 0x30
+        _bytes[2] = 0x22
+        _bytes[3] = 0x24
 
         result = "02"
 
         for i in range(len(inputStart)):
-            bytes[fillCount + i] = inputStart[i]
+            _bytes[fillCount + i] = inputStart[i]
 
-        for i in range(len(bytes) // 8):
+        for i in range(len(_bytes) // 8):
 
             sb = ""
             for j in range(8):
 
-                r1 = bytes[j + 8 * i]
+                r1 = _bytes[j + 8 * i]
 
                 r2 = eorByte[j]
 
@@ -93,9 +94,9 @@ class XLOG:
                     if len(xor) < 2:
                         xor = "0" + xor
                     _str += xor
-        bytes = codecs.decode(_str, 'hex_codec')
+        _bytes = codecs.decode(_str, 'hex_codec')
 
-        count = int(bytes[0]) & 7
+        count = int(_bytes[0]) & 7
 
         resultLen = (len(decode) // 2) - 13 - count
         count = count % 4
@@ -103,9 +104,10 @@ class XLOG:
             count = 4
         result = bytearray(resultLen)
         for i in range(resultLen):
-            result[i] = bytes[count + i]
+            result[i] = _bytes[count + i]
 
-        return result.decode()
+        res= bytes(result).decode()
+        return res
 
     def calculate(self, input, times):
         if len(input) != 16:
@@ -201,7 +203,6 @@ class XLOG:
         p = ctypes.c_int(point << 0).value
 
         if p == ctypes.c_int(0xbfffe920 << 0).value:
-            # print("Sovpalo")
             return ctypes.c_int(0x477001de << 0).value
         if p == ctypes.c_int(0xbfffe924 << 0).value:
             return ctypes.c_int(0xfacedead << 0).value
@@ -209,7 +210,6 @@ class XLOG:
             return ctypes.c_int(0x30303030 << 0).value
         if p == ctypes.c_int(0xbfffe92c << 0).value:
             return ctypes.c_int(0x39353237 << 0).value
-        # print("NET")
         return 0x00000000
 
     def calculateRev(self, input, times):
