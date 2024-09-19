@@ -122,7 +122,7 @@ def x_argus(req: XArgusDict):
     
 
 @app.post("/xladon")
-def x_argus(req: XLadonDict):
+def xladon(req: XLadonDict):
     try:
         # timestamp = X-Khronos value from X-Gorgon generation
         data = Ladon.encrypt(timestamp=req.timestamp,license_id=req.license_id,aid=req.aid)
