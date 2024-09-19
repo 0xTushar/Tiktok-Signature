@@ -72,7 +72,7 @@ class Argus:
 
     @staticmethod
     def get_sign(
-        queryhash: None | str = None,
+        params: None | str = None,
         stub: None | str = None,
         timestamp: int = int(time()),
         aid: int = 1233,
@@ -82,7 +82,7 @@ class Argus:
         sdk_version: str = "v04.04.05-ov-android",
         sdk_version_int: int = 134744640,
     ) -> dict:
-        params_dict = parse_qs(queryhash)
+        params_dict = parse_qs(params)
 
         return Argus.encrypt(
             {
@@ -99,7 +99,7 @@ class Argus:
                 11: platform,  # platform (ios = 1)
                 12: timestamp << 1,  # createTime
                 13: Argus.get_bodyhash(stub),  # bodyHash
-                14: Argus.get_queryhash(queryhash),  # queryHash
+                14: Argus.get_queryhash(params),  # queryHash
                 15: {
                     1: 1,  # signCount
                     2: 1,  # reportCount
