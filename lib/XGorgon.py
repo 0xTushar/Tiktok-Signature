@@ -74,6 +74,7 @@ class XGorgon:
         result = ''
         for item in self.__handle(self.__initialize(gorgon, self.__encryption())):
             result = result + self.__hex2string(item)
+        print(result)
         return '0404{hash1}{hash2}{hash3}{hash4}{hash5}'.format(
             hash1=self.__hex2string(self.hex_str[7]),
             hash2=self.__hex2string(self.hex_str[3]),
