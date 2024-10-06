@@ -1,7 +1,7 @@
 fastapi
 uvicorn 
 pydantic
-pycrypto
+pycryptodome
 opencv-python-headless
 numpy
 python-multipart

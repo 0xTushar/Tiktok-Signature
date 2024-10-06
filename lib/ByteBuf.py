@@ -1,4 +1,4 @@
-from utils.signer.lib.pkcs7_padding import pkcs7_padding_data_length
+from .pkcs7_padding import pkcs7_padding_data_length
 import ctypes
 
 class ByteBuf:
